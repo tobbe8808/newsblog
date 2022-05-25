@@ -33,6 +33,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 ALLOWED_HOSTS = ['newapp888.herokuapp.com', 'localhost']
 
 
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'newsapp',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
