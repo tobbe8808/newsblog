@@ -16,12 +16,33 @@ class Post(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    liked = models.ManyToManyField(User, default=None, blank=True, related_name="liked")
 
     class Meta:
         ordering = ['-created_on']
 
     def __str__(self):
         return self.title
+
+    @property
+    def num_likes(self):
+        return self.liked.all().count()
+
+LIKE_CHOICES = (
+    ('Like', 'Like'),
+    ('Unlike', 'Unlike'),
+)
+
+class Like(models.Model):
+    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    Post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=10)
+
+    def __str__(self):
+        return str(self.post)
+
+
+
 
 
 class Comment(models.Model):
@@ -37,3 +58,5 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
+
+

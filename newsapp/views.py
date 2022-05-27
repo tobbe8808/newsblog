@@ -9,6 +9,7 @@ class PostList(generic.ListView):
     template_name = 'index.html'
     paginate_by = 6
 
+
 def post_detail(request, slug):
     template_name = 'post_detail.html'
     post = get_object_or_404(Post, slug=slug)
@@ -32,3 +33,5 @@ def post_detail(request, slug):
                                            'comments': comments,
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
+
+
