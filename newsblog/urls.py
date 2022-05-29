@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('newsapp.urls')),
     path('summernote/', include('django_summernote.urls')),
+    path('newsapp/', include('newsapp.urls', namespace='newsapp')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
